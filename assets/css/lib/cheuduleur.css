@@ -1,0 +1,49 @@
+.cheuduleur-container {
+  width: 100%;
+  height: 100%;
+  padding: 2.5rem;
+  position: relative;
+}
+
+.cheuduleur-container .cheuduleur-table, .cheuduleur-container .cheuduleur-events {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.cheuduleur-container .cheuduleur-table tr th, .cheuduleur-container .cheuduleur-events tr th {
+  border: 2px solid black;
+  text-align: center;
+  padding: 1rem;
+}
+
+.cheuduleur-container .cheuduleur-table tr th:first-child, .cheuduleur-container .cheuduleur-events tr th:first-child {
+  text-align: start;
+  border-top-left-radius: 0.5rem;
+}
+
+.cheuduleur-container .cheuduleur-table tr td, .cheuduleur-container .cheuduleur-events tr td {
+  border: 2px solid black;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.cheuduleur-container .cheuduleur-table tr td {
+  background-color: transparent;
+  border: 2px solid black;
+}
+
+.cheuduleur-container .cheuduleur-events {
+  z-index: 5;
+}
+
+.cheuduleur-container .cheuduleur-events {
+  z-index: 10;
+}
+
+.cheuduleur-container .cheuduleur-events tr td:first-child {
+  opacity: 0;
+  border-color: transparent;
+}
+/*# sourceMappingURL=cheuduleur.css.map */

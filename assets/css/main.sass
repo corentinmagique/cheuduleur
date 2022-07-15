@@ -1,0 +1,77 @@
+@import url('./fonts.css');
+//LAYOUT BREAKPOINTS
+$breakpoint_mobile: 320px
+$breakpoint_tablet: 481px
+$breakpoint_laptop: 769px
+$breakpoint_desktop: 1025px
+$breakpoint_tv: 1201px
+
+//COLORS
+$main-color: #DA1F2E
+$text-color: #E85C68
+$errorBg-color: #FDEFF0
+$hover-color: #E12C3B
+$second-color: #F8BCC9
+$unactive-textcolor: #d4d4d4
+    
+*
+    box-sizing: border-box
+    margin: 0
+    padding: 0
+
+body, html
+    width: 100%
+    height: 100%
+    font-family: 'Poppins'
+    font-size: 15px
+    background-color: white
+a
+    text-decoration: none
+    &:hover
+        color: $main-color
+    &:active
+        color: $main-color
+input, textarea, select
+    line-height: 1.8
+    font-size: 15px
+    &::selection
+        color: white
+        background-color: $main-color
+ul
+    list-style: none
+    margin: 0
+    padding: 0
+
+h1, h2, h3, h4, h5, h6
+    margin: 0
+    padding: 0
+
+.form-control
+    border-radius: 0.5rem
+    background-color: #F3F6F9
+    outline: none
+    border-color: #F3F6F9
+    color: #3F4254
+    -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease
+    transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease
+    transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease
+    transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease
+    @media screen and ( min-width: $breakpoint_desktop)
+        width: 80%
+    &:active, &:focus
+        box-shadow: none !important
+        background-color: #EBEDF3
+        border-color: #EBEDF3
+        color: #3F4254
+        -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease
+        transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease
+        transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease
+        transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease
+    &.error
+        background-color: $errorBg-color
+        border-color: #F3AEB4
+        -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease
+        transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease
+        transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease
+        transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease
+

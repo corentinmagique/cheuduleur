@@ -1,0 +1,93 @@
+@import url("./fonts.css");
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  font-family: 'Poppins';
+  font-size: 15px;
+  background-color: white;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: #DA1F2E;
+}
+
+a:active {
+  color: #DA1F2E;
+}
+
+input, textarea, select {
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+input::-moz-selection, textarea::-moz-selection, select::-moz-selection {
+  color: white;
+  background-color: #DA1F2E;
+}
+
+input::selection, textarea::selection, select::selection {
+  color: white;
+  background-color: #DA1F2E;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+.form-control {
+  border-radius: 0.5rem;
+  background-color: #F3F6F9;
+  outline: none;
+  border-color: #F3F6F9;
+  color: #3F4254;
+  -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease;
+}
+
+@media screen and (min-width: 1025px) {
+  .form-control {
+    width: 80%;
+  }
+}
+
+.form-control:active, .form-control:focus {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  background-color: #EBEDF3;
+  border-color: #EBEDF3;
+  color: #3F4254;
+  -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease;
+}
+
+.form-control.error {
+  background-color: #FDEFF0;
+  border-color: #F3AEB4;
+  -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease;
+}
+/*# sourceMappingURL=main.css.map */
