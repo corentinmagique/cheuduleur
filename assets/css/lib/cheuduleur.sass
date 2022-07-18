@@ -10,27 +10,49 @@
         left: 0
         tr
             th
-                border: 2px solid black
+                border: 2px dashed rgba(0, 0, 0, 0.15)
+                width: calc( 100% / 8  )
+                border-top-color: transparent
+                border-bottom-color: transparent
                 &:first-child
                     text-align: start
                     border-top-left-radius: 0.5rem
                 text-align: center
-                padding: 1rem
+                padding: 1.75rem
             td
-                border: 2px solid black
-                padding: 1rem
+                width: calc( 100% / 8  )
+                border: 2px dashed rgba(0, 0, 0, 0.15)
+                border-top-color: transparent
+                border-bottom-color: transparent
+                position: relative
                 cursor: pointer
-    .cheuduleur-table
-        tr
-            td
-                background-color: transparent
-                border: 2px solid black
-    .cheuduleur-events
-        z-index: 5
-    .cheuduleur-events
-        z-index: 10
-        tr
-            td
-                &:first-child
-                    opacity: 0
-                    border-color: transparent
+                padding: 1.75rem
+                div
+                    position: absolute
+                    height: calc( 100% - 10px )
+                    width: 100%
+                    top: 5px
+                    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px
+                
+        
+    // .cheuduleur-table
+    //     tr
+    //         td
+    //             background-color: transparent
+    //             border: 2px solid black
+        
+    // .cheuduleur-events
+    //     z-index: 5
+    // .cheuduleur-events
+    //     z-index: 10
+    //     tr
+    //         td
+    //             position: relative
+    //             &:first-child
+    //                 opacity: 0
+    //                 border-color: transparent
+    //             div
+    //                 position: absolute
+    //                 height: calc( 100% - 10px )
+    //                 width: 100%
+    //                 top: 5px

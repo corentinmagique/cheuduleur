@@ -13,9 +13,12 @@
 }
 
 .cheuduleur-container .cheuduleur-table tr th, .cheuduleur-container .cheuduleur-events tr th {
-  border: 2px solid black;
+  border: 2px dashed rgba(0, 0, 0, 0.15);
+  width: calc( 100% / 8);
+  border-top-color: transparent;
+  border-bottom-color: transparent;
   text-align: center;
-  padding: 1rem;
+  padding: 1.75rem;
 }
 
 .cheuduleur-container .cheuduleur-table tr th:first-child, .cheuduleur-container .cheuduleur-events tr th:first-child {
@@ -24,26 +27,21 @@
 }
 
 .cheuduleur-container .cheuduleur-table tr td, .cheuduleur-container .cheuduleur-events tr td {
-  border: 2px solid black;
-  padding: 1rem;
+  width: calc( 100% / 8);
+  border: 2px dashed rgba(0, 0, 0, 0.15);
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  position: relative;
   cursor: pointer;
+  padding: 1.75rem;
 }
 
-.cheuduleur-container .cheuduleur-table tr td {
-  background-color: transparent;
-  border: 2px solid black;
-}
-
-.cheuduleur-container .cheuduleur-events {
-  z-index: 5;
-}
-
-.cheuduleur-container .cheuduleur-events {
-  z-index: 10;
-}
-
-.cheuduleur-container .cheuduleur-events tr td:first-child {
-  opacity: 0;
-  border-color: transparent;
+.cheuduleur-container .cheuduleur-table tr td div, .cheuduleur-container .cheuduleur-events tr td div {
+  position: absolute;
+  height: calc( 100% - 10px);
+  width: 100%;
+  top: 5px;
+  -webkit-box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+          box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 /*# sourceMappingURL=cheuduleur.css.map */
