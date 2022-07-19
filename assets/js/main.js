@@ -1,69 +1,121 @@
 let test = new Cheuduleur({
     days: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
     serviceName: 'Chambres',
-    startDate : '07/25/2022',
-    endDate : '07/31/2022',
+    // startDate : new Date('07-25-2022'),
+    // endDate : new Date('07-30-2022'),
     events: [
-        {
-            'Chambre 1' : [
                 {
-                    eventId: 0,
-                    startDate: 1,
-                    endDate: 2,
-                    backgroundColor: '#1abc9c',
-                    username: 'Jean'
+                    id : 10,
+                    name : 'Chambre 1',
+                    data: [
+                        {
+                            eventId: 45,
+                            startDate: '07-11-2022',
+                            endDate: '07-23-2022',
+                            backgroundColor: '#1abc9c',
+                            customer: 'Antilope'
+                        },
+                        {
+                            eventId: 78,
+                            startDate: '07-23-2022',
+                            endDate: '07-24-2022',
+                            backgroundColor: '#e74c3c',
+                            customer: 'Escalope'
+                        }
+                    ]
                 },
                 {
-                    eventId: 1,
-                    startDate: 2,
-                    endDate: 5,
-                    backgroundColor: '#2ecc71',
-                    username: 'Jean'
+                    id : 789,
+                    name : 'Chambre 2',
+                    data: [
+                        {
+                            eventId: 60,
+                            startDate: '07-18-2022',
+                            endDate: '09-30-2022',
+                            backgroundColor: '#f39c12',
+                            customer: 'Chenasse'
+                        }
+                    ]
+                },{
+                    id : 10,
+                    name : 'Chambre 1',
+                    data: [
+                        {
+                            eventId: 45,
+                            startDate: '07-11-2022',
+                            endDate: '08-08-2022',
+                            backgroundColor: '#9b59b6',
+                            customer: 'Antilope'
+                        },
+                        {
+                            eventId: 78,
+                            startDate: '07-23-2022',
+                            endDate: '07-24-2022',
+                            backgroundColor: '#e74c3c',
+                            customer: 'Escalope'
+                        }
+                    ]
+                },{
+                    id : 10,
+                    name : 'Chambre 1',
+                    data: [
+                        {
+                            eventId: 45,
+                            startDate: '07-11-2022',
+                            endDate: '07-23-2022',
+                            backgroundColor: '#1abc9c',
+                            customer: 'Antilope'
+                        },
+                        {
+                            eventId: 78,
+                            startDate: '07-23-2022',
+                            endDate: '07-24-2022',
+                            backgroundColor: '#e74c3c',
+                            customer: 'Escalope'
+                        }
+                    ]
+                },{
+                    id : 10,
+                    name : 'Chambre 1',
+                    data: [
+                        {
+                            eventId: 45,
+                            startDate: '08-05-2022',
+                            endDate: '08-23-2022',
+                            backgroundColor: '#1abc9c',
+                            customer: 'Antilope'
+                        },
+                        {
+                            eventId: 78,
+                            startDate: '07-23-2022',
+                            endDate: '07-24-2022',
+                            backgroundColor: '#e74c3c',
+                            customer: 'Escalope'
+                        }
+                    ]
+                },{
+                    id : 10,
+                    name : 'Chambre 1',
+                    data: [
+                        {
+                            eventId: 45,
+                            startDate: '07-11-2022',
+                            endDate: '07-20-2022',
+                            backgroundColor: '#e67e22',
+                            customer: 'Antilope'
+                        },
+                        {
+                            eventId: 78,
+                            startDate: '07-23-2022',
+                            endDate: '07-24-2022',
+                            backgroundColor: '#e74c3c',
+                            customer: 'Escalope'
+                        }
+                    ]
                 }
             ]
-        },
-        {
-            'Chambre 2' : [
-                {
-                    eventId: 2,
-                    startDate: 0,
-                    endDate: 1,
-                    backgroundColor: '#3498db',
-                    username: 'Jean'
-                },
-                {
-                    eventId: 3,
-                    startDate: 1,
-                    endDate: 4,
-                    backgroundColor: '#9b59b6',
-                    username: 'Jean'
-                }
-                ,
-                {
-                    eventId: 3,
-                    startDate: 5,
-                    endDate: 6,
-                    backgroundColor: '#34495e',
-                    username: 'Jean'
-                }
-               
-            ]
-        },
-        {
-            'Chambre 3' : [
-                {
-                    eventId: 4,
-                    startDate: 1,
-                    endDate: 6,
-                    backgroundColor: '#e74c3c',
-                    username: 'Jean'
-                }
-            ]
-        }
-        
-        
-    ]
         
 })
 
 test.draw()
+test.test()

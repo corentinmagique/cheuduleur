@@ -32,7 +32,6 @@
   border-top-color: transparent;
   border-bottom-color: transparent;
   position: relative;
-  cursor: pointer;
   padding: 1.75rem;
 }
 
@@ -41,7 +40,8 @@
   height: calc( 100% - 10px);
   width: 100%;
   top: 5px;
-  -webkit-box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-          box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  cursor: pointer;
 }
 /*# sourceMappingURL=cheuduleur.css.map */
