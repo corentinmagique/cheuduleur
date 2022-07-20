@@ -10,7 +10,11 @@ class Cheuduleur
             serviceName: 'Chambres',
             customElements: {
                 previousButtonContent: 'Previous',
-                nextButtonContent: 'Next'
+                nextButtonContent: 'Next',
+                colorEventPalette: []
+            },
+            eventClick: (event)=>{
+                alert(`Event n°${event.target.getAttribute('dt-event-id')}`)
             },
             startDate : this.currentMonday(),
             endDate: new Date(this.currentMonday().getTime() + (1000 * 3600 * 24 * 6)),
@@ -90,11 +94,7 @@ class Cheuduleur
         `))
 
         document.querySelectorAll('.eventDetails').forEach((event) => {
-            event.addEventListener('click', (e) =>{
-                let service = e.currentTarget.getAttribute('dt-service')
-                let event_id = e.currentTarget.getAttribute('dt-event-id')
-                alert(`${service} event n° ${event_id}`)
-            })
+            event.addEventListener('click',this.options.eventClick)
         })
 
         document.querySelector('button.previous').addEventListener('click', () =>{

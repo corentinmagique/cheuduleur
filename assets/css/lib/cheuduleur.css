@@ -98,8 +98,8 @@
 }
 
 .bounce-in {
-  -webkit-animation: bounce-in .5s ease;
-          animation: bounce-in .5s ease;
+  -webkit-animation: bounce-in .4s ease;
+          animation: bounce-in .4s ease;
 }
 
 @-webkit-keyframes bounce-in {
