@@ -8,6 +8,10 @@ class Cheuduleur
             daysShort: [ 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.', 'Dim.'],
             months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
             serviceName: 'Chambres',
+            customElements: {
+                previousButtonContent: 'Previous',
+                nextButtonContent: 'Next'
+            },
             startDate : this.currentMonday(),
             endDate: new Date(this.currentMonday().getTime() + (1000 * 3600 * 24 * 6)),
             events: []
@@ -68,8 +72,8 @@ class Cheuduleur
                         ${this.options.months[this.currentStartDate.getMonth()]} ${this.currentStartDate.getFullYear()}
                     </div>
                     <div class="actions">
-                        <button class="previous"><span class="material-icons-outlined">navigate_before<span></button>
-                        <button class="next"><span class="material-icons-outlined">navigate_next<span></button>
+                        <button class="previous">${this.options.customElements.previousButtonContent}</button>
+                        <button class="next">${this.options.customElements.nextButtonContent}</button>
                     </div>
                 </div>
                 
@@ -108,7 +112,6 @@ class Cheuduleur
         this.divParentElement.innerHTML = ''
     }
     
-
     navigate(direction){
         this.currentStartDate = new Date(this.currentStartDate.getTime() + 1000 * 3600 * 24 * direction * 7)
         this.currentEndDate = new Date(this.currentEndDate.getTime() + 1000 * 3600 * 24 * direction * 7)
@@ -117,7 +120,6 @@ class Cheuduleur
         this.reset()
         this.draw()
     }
-
 
     renderEvent(key, el){
 
@@ -129,7 +131,7 @@ class Cheuduleur
         let endDateIndex = slotInWeek[1].getDay()
         
         return `
-            <div dt-service="${key}" dt-event-id="${el.eventId}" class="eventDetails" style="
+            <div dt-service="${key}" dt-event-id="${el.eventId}" class="eventDetails bounce-in" style="
             background-color:${el.backgroundColor}80;
             border: 2px solid ${el.backgroundColor};
             width: calc( ${(this.indexMapping[endDateIndex] - this.indexMapping[startDateIndex] + 1) * 100}% + ${widthOffset}%);
@@ -192,6 +194,5 @@ class Cheuduleur
         const element = parser.parseFromString(template, "text/html")
         return element.body.firstChild
     }
-
 
 }

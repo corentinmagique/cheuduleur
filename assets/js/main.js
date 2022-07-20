@@ -1,8 +1,10 @@
 let test = new Cheuduleur({
     days: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
     serviceName: 'Chambres',
-    // startDate : new Date('07-25-2022'),
-    // endDate : new Date('07-30-2022'),
+    customElements: {
+        previousButtonContent: '<span class="material-icons-outlined">navigate_before<span>',
+        nextButtonContent: '<span class="material-icons-outlined">navigate_next<span>'
+    },
     events: [
                 {
                     id : 10,

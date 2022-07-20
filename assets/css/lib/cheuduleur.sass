@@ -30,11 +30,15 @@
         border-top: 2px solid rgba(0, 0, 0, 0.75)
         border-bottom: 2px solid rgba(0, 0, 0, 0.75)
         tr
+            &:nth-child(odd)
+                background-color: #f5f5f5
+                
             th
                 border: 2px dashed rgba(0, 0, 0, 0.15)
                 width: calc( 100% / 8  )
                 border-top-color: transparent
                 border-bottom-color: transparent
+                background-color: white
                 &:first-child
                     text-align: start
                     border-top-left-radius: 0.5rem
@@ -54,3 +58,16 @@
                     top: 5px
                     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px
                     cursor: pointer
+.bounce-in
+    animation: bounce-in .5s ease
+@keyframes bounce-in
+    0%
+        opacity: 0
+        transform: scale(.3)
+    50%
+        opacity: 1
+        transform: scale(1.05)
+    70%
+        transform: scale(.9)
+    100%
+        transform: scale(1)
