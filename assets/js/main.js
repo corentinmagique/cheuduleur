@@ -15,15 +15,15 @@ let test = new Cheuduleur({
                     data: [
                         {
                             eventId: 45,
-                            startDate: '07-11-2022',
-                            endDate: '07-23-2022',
+                            startDate: '2022-07-11',
+                            endDate: '2022-07-23',
                             backgroundColor: '#1abc9c',
                             customer: 'Antilope'
                         },
                         {
                             eventId: 78,
-                            startDate: '07-23-2022',
-                            endDate: '07-26-2022',
+                            startDate: '2022-07-23',
+                            endDate: '2022-07-26',
                             backgroundColor: '#e74c3c',
                             customer: 'Escalope'
                         }
@@ -56,15 +56,15 @@ let test = new Cheuduleur({
                     data: [
                         {
                             eventId: 45,
-                            startDate: '07-11-2022',
-                            endDate: '07-20-2022',
+                            startDate: '2022-07-11',
+                            endDate: '2022-07-20',
                             backgroundColor: '#e67e22',
                             customer: 'Antilope'
                         },
                         {
                             eventId: 78,
-                            startDate: '07-23-2022',
-                            endDate: '07-24-2022',
+                            startDate: '2022-07-23',
+                            endDate: '2022-07-24',
                             backgroundColor: '#9b59b6',
                             customer: 'Escalope'
                         }

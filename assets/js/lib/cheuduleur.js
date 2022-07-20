@@ -33,6 +33,8 @@ class Cheuduleur
         let tableHeader = `<th>${this.options.serviceName}</th>`
         let tableBody = ``
 
+        console.log(this.currentMonday())
+
         this.divParentElement.classList.add('cheuduleur-container')
 
         for(let i = 0; i <= this.daysNumber();++i)
@@ -168,7 +170,9 @@ class Cheuduleur
     {
         let currentDate = new Date()
         currentDate = new Date(currentDate.getTime() - (1000 * 3600 * 24 * (currentDate.getDay() - 1)))
-        let currentMonday = currentDate.getMonth()+1+'-'+currentDate.getDate()+'-'+currentDate.getFullYear()
+        let currentDateInt = parseInt(currentDate.getMonth()) + 1
+        let currentMonday = currentDate.getFullYear()+'-'+currentDateInt+'-'+currentDate.getDate()
+        console.log(currentMonday)
         return new Date(currentMonday)
     }
 
