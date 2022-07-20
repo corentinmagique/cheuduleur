@@ -5,11 +5,58 @@
   position: relative;
 }
 
+.cheuduleur-container .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.cheuduleur-container .header .infos {
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 1em;
+}
+
+.cheuduleur-container .header .actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  padding: 1em;
+}
+
+.cheuduleur-container .header .actions button {
+  padding: 0.75em;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0.25em;
+  border-radius: 0.25rem;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.cheuduleur-container .header .actions button span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .cheuduleur-container .cheuduleur-table, .cheuduleur-container .cheuduleur-events {
   width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+  border-top: 2px solid rgba(0, 0, 0, 0.75);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.75);
 }
 
 .cheuduleur-container .cheuduleur-table tr th, .cheuduleur-container .cheuduleur-events tr th {

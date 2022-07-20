@@ -6,6 +6,7 @@ class Cheuduleur
             divParentSelector: '.cheuduleur',
             days: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
             daysShort: [ 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.', 'Dim.'],
+            months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
             serviceName: 'Chambres',
             startDate : this.currentMonday(),
             endDate: new Date(this.currentMonday().getTime() + (1000 * 3600 * 24 * 6)),
@@ -62,6 +63,16 @@ class Cheuduleur
 
         this.divParentElement.appendChild(this.stringToHtml(`
             <div>
+                <div class="header">
+                    <div class="infos">
+                        ${this.options.months[this.currentStartDate.getMonth()]} ${this.currentStartDate.getFullYear()}
+                    </div>
+                    <div class="actions">
+                        <button class="previous"><span class="material-icons-outlined">navigate_before<span></button>
+                        <button class="next"><span class="material-icons-outlined">navigate_next<span></button>
+                    </div>
+                </div>
+                
                 <table class="cheuduleur-table">
                     <thead>
                         ${tableHeader}
@@ -82,24 +93,31 @@ class Cheuduleur
             })
         })
 
+        document.querySelector('button.previous').addEventListener('click', () =>{
+            this.navigate(-1)
+        })
+
+        document.querySelector('button.next').addEventListener('click', () =>{
+            this.navigate(1)
+        })
+
     }
 
     reset()
     {
         this.divParentElement.innerHTML = ''
     }
+    
 
-    test()
-    {
-        document.addEventListener('click', ()=>{
-            this.currentStartDate = new Date(this.currentStartDate.getTime() + 1000 * 3600 * 24 * 7)
-            this.currentEndDate = new Date(this.currentEndDate.getTime() + 1000 * 3600 * 24 * 7)
-            this.options.startDate = this.currentStartDate
-            this.options.endDate = this.currentEndDate
-            this.reset()
-            this.draw()
-        })
+    navigate(direction){
+        this.currentStartDate = new Date(this.currentStartDate.getTime() + 1000 * 3600 * 24 * direction * 7)
+        this.currentEndDate = new Date(this.currentEndDate.getTime() + 1000 * 3600 * 24 * direction * 7)
+        this.options.startDate = this.currentStartDate
+        this.options.endDate = this.currentEndDate
+        this.reset()
+        this.draw()
     }
+
 
     renderEvent(key, el){
 

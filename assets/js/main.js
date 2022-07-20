@@ -18,7 +18,7 @@ let test = new Cheuduleur({
                         {
                             eventId: 78,
                             startDate: '07-23-2022',
-                            endDate: '07-24-2022',
+                            endDate: '07-26-2022',
                             backgroundColor: '#e74c3c',
                             customer: 'Escalope'
                         }
@@ -118,4 +118,3 @@ let test = new Cheuduleur({
 })
 
 test.draw()
-test.test()

@@ -3,11 +3,32 @@
     height: 100%
     padding: 2.5rem
     position: relative
+    .header
+        display: flex
+        justify-content: space-between
+        align-items: center
+        .infos
+            font-size: 1.5rem
+            font-weight: 600
+            padding: 1em
+        .actions
+            display: flex
+            justify-content: end
+            padding: 1em
+            button
+                padding: 0.75em
+                width: fit-content
+                margin: 0.25em
+                border-radius: 0.25rem
+                background-color: white
+                border: 1px solid rgba(0, 0, 0, 0.5)
+                span
+                    display: flex
+                    align-items: center
     .cheuduleur-table, .cheuduleur-events
         width: 100%
-        position: absolute
-        top: 0
-        left: 0
+        border-top: 2px solid rgba(0, 0, 0, 0.75)
+        border-bottom: 2px solid rgba(0, 0, 0, 0.75)
         tr
             th
                 border: 2px dashed rgba(0, 0, 0, 0.15)
