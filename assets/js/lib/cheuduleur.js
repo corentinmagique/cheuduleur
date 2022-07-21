@@ -4,6 +4,7 @@ class Cheuduleur
 
         const defaultOptions = {
             divParentSelector: '.cheuduleur',
+            type: 'simple',
             days: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
             daysShort: [ 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.', 'Dim.'],
             months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
@@ -25,15 +26,13 @@ class Cheuduleur
         this.divParentElement = document.querySelector(this.options.divParentSelector)
         this.currentStartDate = this.options.startDate
         this.currentEndDate = this.options.endDate
-        this.indexMapping =  [6,0,1,2,3,4,5]
+        this.indexMapping = (this.detectBrowser() == 'Firefox') ?  [6,0,1,2,3,4,5] : [6,0,1,2,3,4,5]
     }
 
-    draw(){
-        
+    simpleMode()
+    {
         let tableHeader = `<th>${this.options.serviceName}</th>`
         let tableBody = ``
-
-        console.log(this.currentMonday())
 
         this.divParentElement.classList.add('cheuduleur-container')
 
@@ -106,7 +105,92 @@ class Cheuduleur
         document.querySelector('button.next').addEventListener('click', () =>{
             this.navigate(1)
         })
+    }
 
+    advancedMode()
+    {
+        let tableHeader = `<th>${this.options.serviceName}</th>`
+        let tableBody = ``
+
+        this.divParentElement.classList.add('cheuduleur-container')
+
+        for(let i = 0; i <= this.daysNumber();++i)
+        {
+            tableHeader += `<th><span class="text-secondary">${this.options.daysShort[this.indexMapping[this.dayDate(i).getDay()]]}</span> <span>${this.dayDate(i).getDate()}</span></th>`
+        }
+
+        this.options.events.forEach((event)=>{
+            let key = Object.keys(event)
+            let tableElements = `<td>${event.name}</td>`
+            
+            for(let i = 0; i <= this.daysNumber();++i)
+            {
+                let content = ``
+                if(i == 0)
+                {
+                    event.data.forEach((el, index)=>{
+                        if(this.isInCurrentWeek(el.startDate, el.endDate))
+                            content += this.renderEvent(key, el)
+                    })
+                    
+                }else
+                {
+                    content = ``
+                }
+                tableElements += `<td>${content}</td>`
+            }
+            
+            let tableRow = `
+                <tr>
+                    ${tableElements}
+                </tr>
+            `
+            tableBody += tableRow
+        })
+
+        this.divParentElement.appendChild(this.stringToHtml(`
+            <div>
+                <div class="header">
+                    <div class="infos">
+                        ${this.options.months[this.currentStartDate.getMonth()]} ${this.currentStartDate.getFullYear()}
+                    </div>
+                    <div class="actions">
+                        <button class="previous">${this.options.customElements.previousButtonContent}</button>
+                        <button class="next">${this.options.customElements.nextButtonContent}</button>
+                    </div>
+                </div>
+                
+                <table class="cheuduleur-table">
+                    <thead>
+                        ${tableHeader}
+                    </thead>
+                    <tbody>
+                    ${tableBody}
+                    </tbody>
+                </table>
+            </div>
+            
+        `))
+
+        document.querySelectorAll('.eventDetails').forEach((event) => {
+            event.addEventListener('click',this.options.eventClick)
+        })
+
+        document.querySelector('button.previous').addEventListener('click', () =>{
+            this.navigate(-1)
+        })
+
+        document.querySelector('button.next').addEventListener('click', () =>{
+            this.navigate(1)
+        })
+    }
+
+    draw(){
+        console.log(this.detectBrowser())
+        if(this.options.type === 'simple')
+            this.simpleMode()
+        else
+            this.advancedMode()
     }
 
     reset()
@@ -151,14 +235,14 @@ class Cheuduleur
 
     numberDaysInCurrentWeek(startDate, endDate)
     {
-       let left = Math.floor((this.currentStartDate.getTime() - new Date(startDate).getTime()) / (1000 * 3600 * 24)), right = Math.ceil((new Date(endDate).getTime() - this.currentEndDate.getTime()) / (1000 * 3600 * 24))
+       let left = Math.ceil((this.currentStartDate.getTime() - new Date(startDate).getTime()) / (1000 * 3600 * 24)), right = Math.floor((new Date(endDate).getTime() - this.currentEndDate.getTime()) / (1000 * 3600 * 24))
        return [ (left <= 0) ? 0 : left, (right <= 0) ? 0 : right]
     }  
 
     slotInCurrentWeek(startDate, endDate)
     {
         let offsets = this.numberDaysInCurrentWeek(startDate, endDate)
-        return [ new Date(new Date(startDate).getTime() + (1000 * 3600 * 24 * offsets[0])), new Date(new Date(endDate).getTime() - (1000 * 3600 * 24 * offsets[1])) ]
+        return [ new Date(new Date(new Date(startDate).getTime() + (1000 * 3600 * 24 * offsets[0])).toLocaleString('en-US')), new Date(new Date(new Date(endDate).getTime() - (1000 * 3600 * 24 * offsets[1])).toLocaleString('en-US')) ]
     }
 
     isInCurrentWeek(startDate, endDate) {
@@ -172,7 +256,6 @@ class Cheuduleur
         currentDate = new Date(currentDate.getTime() - (1000 * 3600 * 24 * (currentDate.getDay() - 1)))
         let currentDateInt = parseInt(currentDate.getMonth()) + 1
         let currentMonday = currentDate.getFullYear()+'-'+currentDateInt+'-'+currentDate.getDate()
-        console.log(currentMonday)
         return new Date(currentMonday)
     }
 
@@ -198,5 +281,21 @@ class Cheuduleur
         const element = parser.parseFromString(template, "text/html")
         return element.body.firstChild
     }
+
+    detectBrowser() { 
+        if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ) {
+            return 'Opera'
+        } else if(navigator.userAgent.indexOf("Chrome") != -1 ) {
+            return 'Chrome'
+        } else if(navigator.userAgent.indexOf("Safari") != -1) {
+            return 'Safari'
+        } else if(navigator.userAgent.indexOf("Firefox") != -1 ){
+            return 'Firefox'
+        } else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) {
+            return 'IE'//crap
+        } else {
+            return 'Unknown'
+        }
+    } 
 
 }
