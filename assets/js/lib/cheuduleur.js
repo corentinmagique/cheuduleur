@@ -7,6 +7,7 @@ class Cheuduleur
             type: 'simple',
             days: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
             daysShort: [ 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.', 'Dim.'],
+            slots: ['8h00', '10h00', '12h00', '14h00', '16h00', '18h00', '20h00'],
             months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
             serviceName: 'Chambres',
             customElements: {
@@ -26,7 +27,7 @@ class Cheuduleur
         this.divParentElement = document.querySelector(this.options.divParentSelector)
         this.currentStartDate = this.options.startDate
         this.currentEndDate = this.options.endDate
-        this.indexMapping = (this.detectBrowser() == 'Firefox') ?  [6,0,1,2,3,4,5] : [6,0,1,2,3,4,5]
+        this.indexMapping =  [6,0,1,2,3,4,5]
     }
 
     simpleMode()
@@ -99,51 +100,64 @@ class Cheuduleur
         })
 
         document.querySelector('button.previous').addEventListener('click', () =>{
-            this.navigate(-1)
+            this.navigate(-1,7)
         })
 
         document.querySelector('button.next').addEventListener('click', () =>{
-            this.navigate(1)
+            this.navigate(1,7)
         })
     }
 
     advancedMode()
     {
-        let tableHeader = `<th>${this.options.serviceName}</th>`
+        let tableHeader = `<th rowspan="2">${this.options.serviceName}</th>`
         let tableBody = ``
 
         this.divParentElement.classList.add('cheuduleur-container')
 
         for(let i = 0; i <= this.daysNumber();++i)
         {
-            tableHeader += `<th><span class="text-secondary">${this.options.daysShort[this.indexMapping[this.dayDate(i).getDay()]]}</span> <span>${this.dayDate(i).getDate()}</span></th>`
+            tableHeader += `<th><span class="text-secondary">${this.options.slots[i]}</span></th>`
         }
 
-        this.options.events.forEach((event)=>{
+        this.options.events.forEach((event, index)=>{
             let key = Object.keys(event)
-            let tableElements = `<td>${event.name}</td>`
+            let tableElements = `<td style="font-weight:500;color:#3498db">${event.name}</td>`
+            let employeesElements = ``
             
-            for(let i = 0; i <= this.daysNumber();++i)
+            for(let i = 0; i <= this.options.slots.length - 1;++i)
             {
                 let content = ``
-                if(i == 0)
-                {
-                    event.data.forEach((el, index)=>{
-                        if(this.isInCurrentWeek(el.startDate, el.endDate))
-                            content += this.renderEvent(key, el)
-                    })
-                    
-                }else
-                {
-                    content = ``
-                }
                 tableElements += `<td>${content}</td>`
             }
+
+            event.data.forEach((el)=>{
+                let tdEmployees = `<td>${el.name}</td>`
+                for(let i = 0; i <= this.options.slots.length - 1;++i)
+                {
+                    let content = ``
+                    if(i == 0)
+                    {
+                        el.slots.forEach((slot, index)=>{
+                            if(this.isInCurrentDay(new Date(slot.startDate)))
+                                content += this.renderAdvancedEvent(key, slot)
+                        })
+                        
+                    }else
+                    {
+                        content = ``
+                    }
+                
+                    tdEmployees += `<td>${content}</td>`
+                }
+                employeesElements += `<tr>${tdEmployees}</tr>`
+            })
             
             let tableRow = `
-                <tr>
+                <tr style="background-color: #3498db40">
                     ${tableElements}
                 </tr>
+                ${employeesElements}
             `
             tableBody += tableRow
         })
@@ -152,7 +166,7 @@ class Cheuduleur
             <div>
                 <div class="header">
                     <div class="infos">
-                        ${this.options.months[this.currentStartDate.getMonth()]} ${this.currentStartDate.getFullYear()}
+                       ${this.options.days[this.indexMapping[this.currentStartDate.getDay()]]} ${this.currentStartDate.getDate()} ${this.options.months[this.currentStartDate.getMonth()]} ${this.currentStartDate.getFullYear()}
                     </div>
                     <div class="actions">
                         <button class="previous">${this.options.customElements.previousButtonContent}</button>
@@ -172,21 +186,16 @@ class Cheuduleur
             
         `))
 
-        document.querySelectorAll('.eventDetails').forEach((event) => {
-            event.addEventListener('click',this.options.eventClick)
-        })
-
         document.querySelector('button.previous').addEventListener('click', () =>{
-            this.navigate(-1)
+            this.navigate(-1,1)
         })
 
         document.querySelector('button.next').addEventListener('click', () =>{
-            this.navigate(1)
+            this.navigate(1,1)
         })
     }
 
     draw(){
-        console.log(this.detectBrowser())
         if(this.options.type === 'simple')
             this.simpleMode()
         else
@@ -198,9 +207,9 @@ class Cheuduleur
         this.divParentElement.innerHTML = ''
     }
     
-    navigate(direction){
-        this.currentStartDate = new Date(this.currentStartDate.getTime() + 1000 * 3600 * 24 * direction * 7)
-        this.currentEndDate = new Date(this.currentEndDate.getTime() + 1000 * 3600 * 24 * direction * 7)
+    navigate(direction, days){
+        this.currentStartDate = new Date(this.currentStartDate.getTime() + 1000 * 3600 * 24 * direction * days)
+        this.currentEndDate = new Date(this.currentEndDate.getTime() + 1000 * 3600 * 24 * direction * days)
         this.options.startDate = this.currentStartDate
         this.options.endDate = this.currentEndDate
         this.reset()
@@ -233,6 +242,41 @@ class Cheuduleur
         `
     }
 
+    renderAdvancedEvent(key, el){
+        let firstTime = this.stringToMs(this.options.slots[0])
+        let startDate = this.dateToMs(new Date(el.startDate))
+        let index = Math.floor(((startDate - firstTime) / (1000 * 3600)) / 2)
+        let leftPos = (startDate * 50) / firstTime
+        let width = (el.duration * 100) / 120
+        
+        return `
+            <div dt-service="${key}" dt-event-id="${el.id}" class="eventDetails bounce-in" style="
+            background-color:${el.backgroundColor}80;
+            border: 2px solid ${el.backgroundColor};
+            width: ${width}%;
+            left: calc(${leftPos}% + ${index * 100}%);
+            border-radius: 0.75rem;
+            padding: 0.5rem;
+            color: ${el.backgroundColor};
+            font-weight: bold;
+            z-index: 50;
+            ">
+            ${el.customer}
+            </div>
+        `
+    }
+
+    dateToMs(date)
+    {
+        return (date.getHours() * 3600 * 1000) + (date.getMinutes() * 60 * 1000)
+    }
+
+    stringToMs(string)
+    {
+        let exploded = string.split(':')
+        return (exploded[0] * 3600 * 1000) + (exploded[1] * 60 * 1000)
+    }
+
     numberDaysInCurrentWeek(startDate, endDate)
     {
        let left = Math.ceil((this.currentStartDate.getTime() - new Date(startDate).getTime()) / (1000 * 3600 * 24)), right = Math.floor((new Date(endDate).getTime() - this.currentEndDate.getTime()) / (1000 * 3600 * 24))
@@ -248,6 +292,11 @@ class Cheuduleur
     isInCurrentWeek(startDate, endDate) {
         let slots = this.slotInCurrentWeek(startDate, endDate)
         return !(new Date(startDate).getTime() > this.currentEndDate.getTime() || new Date(endDate).getTime() <= this.currentStartDate.getTime())
+    }
+
+    isInCurrentDay(date)
+    {
+        return date.getDate() === this.currentStartDate.getDate() && date.getMonth() === this.currentStartDate.getMonth() && date.getFullYear() === this.currentStartDate.getFullYear()
     }
 
     currentMonday()
@@ -276,26 +325,18 @@ class Cheuduleur
         return new Date(new Date(startDate.getTime() + (1000 * 3600 * 24 * offsetDay)))
     }
 
+    addLine(table, index, content) {
+        let refTable = document.querySelector(table)
+        let newLine = refTable.insertRow(index)
+        let newCel = newLine.insertCell(0)
+        var content = document.createTextNode(content)
+        newCel.appendChild(content)
+      }
+
     stringToHtml(template){
         const parser = new DOMParser()
         const element = parser.parseFromString(template, "text/html")
         return element.body.firstChild
     }
-
-    detectBrowser() { 
-        if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ) {
-            return 'Opera'
-        } else if(navigator.userAgent.indexOf("Chrome") != -1 ) {
-            return 'Chrome'
-        } else if(navigator.userAgent.indexOf("Safari") != -1) {
-            return 'Safari'
-        } else if(navigator.userAgent.indexOf("Firefox") != -1 ){
-            return 'Firefox'
-        } else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) {
-            return 'IE'//crap
-        } else {
-            return 'Unknown'
-        }
-    } 
 
 }
